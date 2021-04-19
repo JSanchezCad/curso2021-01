@@ -1,12 +1,18 @@
 <?xml version="1.0"?>
 <odoo>
-     <record id="view_form_helpdesk" model="helpdesk.ticket">
+    <record id="view_form_helpdesk" model="ir.ui.view">
         <field name="name">view.helpdesk_ticket.form</field>
         <field name="model">helpdesk.ticket</field>
         <field name="arch" type="xml">
             <form string='Ticket'>
                 <header>
                     <field name="name" widget='statusbar'/>
+                    <button name="asignar" type="object" string="asignado" class="btn-primary" states="asignado" />
+                    <button name="proceso" type="object" string="proceso" class="btn-primary" states="proceso" />
+                    <button name="pendiente" type="object" string="pendiente" class="btn-primary"  states="pendiente"/>
+                    <button name="finalizar" type="object" string="resuelto" class="btn-primary" states="finalizado"/>
+                    <button name="cancelar" type="object" string="cancelado" class="btn-primary" states="cancelado"/>
+                    <!-- states para definir cuando se verá -->
                 </header>
                 <sheet>
                     <div class='oetitle'>
@@ -18,6 +24,7 @@
                         <group>
                             <field name="date" />
                             <field name="date_limit" />
+                            <field name="state" />
                         </group>
                         <group>
                             <field name="assigned" />
@@ -29,19 +36,18 @@
                             <field name='description'/>
                         </page>
                         <page string='Quality'>
-                           
-                            <group>
-                                <field name='action_corrective'/>
+                            <group string='Corrective Action'>
+                                <field name='action_corrective' nolabel='1'/>
                             </group>
-                            <group>
-                                <field name='action_preventive'/>
+                            <group string='Preventive Action'>
+                                <field name='action_preventive' nolabel='1'/>
                             </group>
                         </page>
                     </notebook>
                 </sheet>
             </form>
         </field>
-    </record> 
+    </record>
     <record id="view_helpdesk_ticket_tree" model="ir.ui.view">
         <field name="name">view.helpdesk_ticket.tree</field>
         <field name="model">helpdesk.ticket</field>
